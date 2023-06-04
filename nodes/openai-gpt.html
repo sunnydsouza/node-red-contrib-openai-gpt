@@ -1,0 +1,138 @@
+<script type="text/html" data-template-name="openai-gpt">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-config"><i class="icon-globe"></i> Config</label>
+        <input type="text" id="node-input-config">
+    </div>
+    <div class="form-row">
+        <label for="node-input-role"><i class="icon-list"></i> Role</label>
+        <input type="text" id="node-input-role" placeholder="Role">
+    </div>
+    <div class="form-row">
+        <label for="node-input-message"><i class="icon-comment"></i> Message</label>
+        <input type="text" id="node-input-message" placeholder="Message">
+    </div>
+    <div class="form-row">
+        <label for="node-input-model"><i class="icon-cogs"></i> Model</label>
+        <select id="node-input-model">
+            <option value="gpt-4">gpt-4</option>
+            <option value="gpt-4-0314">gpt-4-0314</option>
+            <option value="gpt-4-32k">gpt-4-32k</option>
+            <option value="gpt-4-32k-0314">gpt-4-32k-0314</option>
+            <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
+            <option value="gpt-3.5-turbo-0301">gpt-3.5-turbo-0301</option>
+        </select>
+    </div>
+    <!-- <div class="form-row">
+        <div class="form-row" style="display: flex; align-items: center;">
+            <label for="node-input-outputVariableType" style="flex: 1;"><i class="icon-tag"></i> Output Variable</label>
+            <select id="node-input-outputVariableType" style="flex: 1; margin-right: 5px;">
+                <option value="msg" selected>msg.</option>
+                <option value="flow">flow.</option>
+                <option value="global">global.</option>
+            </select>
+            <input type="text" id="node-input-outputVariable" style="flex: 2;">
+        </div>
+    </div> -->
+    <div class="form-row">
+        <label for="node-input-outputVariable"><i class="icon-tag"></i> Output Variable</label>
+        <input type="text" id="node-input-outputVariable" style="width:70%" placeholder="Name of the output variable">
+        <input type="hidden" id="node-input-outputVariableType">
+    </div>
+    
+    
+</script>
+
+
+
+<script type="text/html" data-help-name="openai-gpt">
+    <p>A NodeRed node to interact with OpenAI API through different models.</p>
+    <p><b>Inputs:</b></p>
+    <ul>
+        <li><b>Model:</b> The OpenAI model to use. Supported models gpt-4, gpt-4-0314, gpt-4-32k, gpt-4-32k-0314, gpt-3.5-turbo, gpt-3.5-turbo-0301.</li>
+        <li><b>Role:</b> The role to play while interacting with the model. For example 'system', 'user' etc.</li>
+        <li><b>Message:</b> The message content to send to the model.</li>
+    </ul>
+    <p><b>Output:</b> The parsed object `payload.choices[0]['message']['content']` from the API response is set to `msg.paylod`.</p>
+    <p><b>Note:</b> Interacting with OpenAI API would cost as per the pricing policy of OpenAI, and it's also important to respect the usage policies set by OpenAI. Visit https://openai.com/pricing for more details.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('openai-gpt', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: "" },
+            config: { value: "", type: "openai-config", required: true },
+            role: { value: "", required: true },
+            message: { value: "", required: true },
+            model: { value: "gpt-3.5-turbo", required: true },
+            outputVariable: { value: "payload" }, // Variable name
+            outputVariableType: { value: "msg" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "icons/openai.png",
+        label: function () {
+            return this.name || "OpenAI GPT";
+        },
+        oneditprepare: function() {
+            // When the dialog is opened, this function runs
+            $("#node-input-outputVariable").typedInput({
+                default: "msg",
+                types: [
+                    { value: "msg", label: "msg.", hasValue: true },
+                    { value: "flow", label: "flow.", hasValue: true },
+                    { value: "global", label: "global.", hasValue: true }
+                ],
+                typeField: "#node-input-outputVariableType"
+            });
+
+            // Set the initial values
+            $("#node-input-outputVariable").typedInput("value", this.outputVariable || "payload");
+            $("#node-input-outputVariableType").val(this.outputVariableType || "msg");
+        },
+        oneditsave: function() {
+            // When the 'Done' button is clicked, this function runs
+            this.outputVariable = $("#node-input-outputVariable").typedInput("value");
+            this.outputVariableType = $("#node-input-outputVariableType").val();
+        }
+    });
+
+</script>
+
+
+<script type="text/html" data-template-name="openai-config">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-apikey"><i class="icon-lock"></i> API Key</label>
+        <input type="password" id="node-config-input-apikey">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="openai-config">
+    <p>Configuration node for OpenAI GPT.</p>
+    <p>You can add multiple configurations with different API keys. Use the 'Name' field to identify the configurations.</p>
+    <p>API Key is your personal OpenAI API key. It should be kept secret.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('openai-config', {
+        category: 'config',
+        defaults: {
+            name: { value: "" }
+        },
+        credentials: {
+            apikey: { type: "password" }
+        },
+        label: function () {
+            return this.name || "unknown";
+        }
+    });
+</script>

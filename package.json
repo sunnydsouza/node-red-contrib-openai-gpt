@@ -1,0 +1,35 @@
+{
+  "name": "red-contrib-openai-gpt",
+  "version": "1.0.0",
+  "description": "A NodeRed node to interact with OpenAI api through different models",
+  "main": "nodes/openai-gpt.js",
+  "node-red": {
+    "nodes": {
+      "npm": "nodes/openai-gpt.js"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnydsouza/node-red-contrib-openai-gpt.git"
+  },
+  "keywords": [
+    "nodered",
+    "openai",
+    "plugins",
+    "node-red",
+    "gpt"
+    
+  ],
+  "author": "sunnydsouza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sunnydsouza/node-red-contrib-openai-gpt/issues"
+  },
+  "homepage": "https://github.com/sunnydsouza/node-red-contrib-openai-gpt#readme",
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
+}
