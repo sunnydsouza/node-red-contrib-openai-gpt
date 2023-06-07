@@ -1,5 +1,5 @@
 {
-  "name": "red-contrib-openai-gpt",
+  "name": "node-red-contrib-openai-gpt",
   "version": "1.0.0",
   "description": "A NodeRed node to interact with OpenAI api through different models",
   "main": "nodes/openai-gpt.js",
