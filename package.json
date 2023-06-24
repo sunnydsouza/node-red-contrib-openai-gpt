@@ -1,6 +1,7 @@
 {
-  "name": "node-red-contrib-openai-gpt",
+  "name": "@sunnydsouza/node-red-contrib-openai-gpt",
   "version": "1.0.0",
+  "private": false,
   "description": "A NodeRed node to interact with OpenAI api through different models",
   "main": "nodes/openai-gpt.js",
   "node-red": {
