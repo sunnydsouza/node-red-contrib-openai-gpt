@@ -1,10 +1,8 @@
 # Node-RED OpenAI GPT Node
 
-![npm](https://img.shields.io/npm/v/1.0.0)
+![npm](https://img.shields.io/npm/dw/%40sunnydsouza/node-red-contrib-openai-gpt)
 
 A Node-RED custom node that allows interaction with OpenAI's powerful GPT models including gpt-4, gpt-4-0314, gpt-4-32k, gpt-4-32k-0314, gpt-3.5-turbo, gpt-3.5-turbo-0301.
-
-![OpenAI Node-RED node](https://path/to/your/image)
 
 ## 🚀 Features
 
@@ -13,12 +11,23 @@ A Node-RED custom node that allows interaction with OpenAI's powerful GPT models
 - **Control:** Customize the role and the message you send to the model.
 - **Variable output:** Flexibility to store the output in a msg, flow, or global variable of your choice.
 
+## Screenshots
+![OpenAI Node-RED node - Flow example](images/screenshot1.png)
+![OpenAI Node-RED node - Flow example](images/screenshot1.2.png)
+![OpenAI Node-RED node - Flow example](images/screenshot2.png)
+![OpenAI Node-RED node - configuration](images/screenshot3.png)
+![OpenAI Node-RED node - Flow example](images/screenshot4.png)
+
+## Example screencase
+![OpenAI Node-RED node - Example screencase](images/screencast%202023-06-24%2012-48-26.gif)
+
+
 ## 📦 Installation
 
 This node can be installed directly from the Node-RED's palette manager, or via npm:
 
 ```bash
-npm install node-red-contrib-openai-gpt
+npm install @sunnydsouza/node-red-contrib-openai-gpt
 ```
 
 Once installed, restart your Node-RED instance and you should have the OpenAI GPT node available in your palette, and ready to be used!
